@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.extend</title>
+    <script src="../assets/js/vue.js"></script>
+    <link rel="stylesheet" href="../assets/css/index.css"/>
+</head>
+<body>
+    <h1>Vue.extend</h1>
+    <div id="header"></div>
+    <div id="footer"></div>
+    <script>
+        var head_a = Vue.extend({
+            template:'<p>{{message}}</p>',
+            data:function(){
+                return{
+                    message:'hello header'
+                }
+            }
+        });
+        var footer_a = Vue.extend({
+            template:'<p>{{message}}</p>',
+            data:function(){
+                return{
+                    message:'hello footer'
+                }
+            }
+        });
+        new head_a().$mount('#header');
+        new footer_a().$mount('#footer');
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>document</title>
+    <script src="../assets/js/vue.js"></script>
+    <link rel="stylesheet" href="../assets/css/index.css"/>
+</head>
+<body>
+<h1>v-if 判断是否加载& v-show</h1>
+<div id="app">
+    <div v-if="ok">原来是真的</div>
+    <div v-else>原来是假的</div>
+    <hr/>
+    <div v-show="ok">我是v-show</div>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            ok: 'true'
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue 本地过滤</title>
+    <script src="../assets/js/vue.js"></script>
+    <link rel="stylesheet" href="../assets/css/index.css"/>
+</head>
+<body>
+    <h1>本地过滤</h1>
+    <hr/>
+    <div id="app">
+        <div><input type="text" v-model="keyWord"/><button @click="search">搜索</button></div>
+        <select v-model="changeObj.sex">
+            <option value ="">unlimit</option>
+            <option value ="boy">boy</option>
+            <option value ="girl">girl</option>
+        </select>
+        <select v-model="changeObj.age">
+            <option value ="">unlimit</option>
+            <option value ="adult">adult</option>
+            <option value ="child">child</option>
+        </select>
+        <hr/>
+        <table>
+            <thead>
+                <td>firstName</td>
+                <td>lastName</td>
+                <td>genre</td>
+                <td>age</td>
+                <td>sex</td>
+            </thead>
+            <tbody>
+                <tr v-for="items in arr">
+                    <td v-for="(item, key) in items">{{item}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            keyWord: '',
+            changeObj: {
+                age: '',
+                sex: ''
+            },
+            authors: [
+                { "firstName": "Isaac", "lastName": "Asimov", "genre": "science fiction", "age": "adult", "sex": "girl" },
+                { "firstName": "Tad", "lastName": "Williams", "genre": "fantasy", "age": "adult", "sex": "boy" },
+                { "firstName": "Frank", "lastName": "Peretti", "genre": "christian fiction", "age": "adult", "sex": "girl"},
+                { "firstName": "Tom", "lastName": "Asimov", "genre": "science fiction", "age": "adult", "sex": "boy" },
+                { "firstName": "Jack", "lastName": "Williams", "genre": "fantasy", "age": "child", "sex": "boy" },
+                { "firstName": "Last", "lastName": "Peretti", "genre": "christian fiction", "age": "child", "sex": "girl" }
+            ],
+            arr: []
+        },
+        watch: {
+            changeObj: {
+                handler: function (val) {
+                    this.changeObj = val
+                    this.search()
+                },
+                deep: true
+            }
+        },
+        methods:{
+            search: function () {
+                var _self = this
+                var arr = _self.searchByIndexOf(_self.keyWord, _self.authors, "firstName")
+                if(!_self.changeObj || _self.changeObj === null) {
+                    _self.arr = arr
+                } else {
+                    var arr = arr.filter(function(item){
+                        if(_self.changeObj.sex === ''){
+                            return item
+                        } else {
+                            return item.sex === _self.changeObj.sex
+                        }
+                    }).filter(function(item){
+                        if(_self.changeObj.age === ''){
+                            return item
+                        } else {
+                            return item.age === _self.changeObj.age
+                        }
+                    })
+                    _self.arr = arr
+                }
+            },
+            searchByIndexOf: function (keyWord, list, key){
+                if(!(list instanceof Array)){
+                    return
+                }
+                var len = list.length
+                var arr = []
+                for(var i=0;i<len;i++){
+                    //如果字符串中不包含目标字符会返回-1
+                    if(list[i][key].toUpperCase().indexOf(keyWord.toUpperCase())>=0){
+                            arr.push(list[i])
+                    }
+                }
+                return arr
+            }
+        },
+        computed: {
+        },
+        mounted: function () {
+            this.arr = this.authors
+        }
+    })
+
+</script>
+</html>

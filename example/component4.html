@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component4</title>
+    <script src="../assets/js/vue.js"></script>
+    <link rel="stylesheet" href="../assets/css/index.css"/>
+</head>
+<body>
+<h1>component4</h1>
+<hr/>
+    <div id="app">
+        <component v-bind:is="who"></component>
+        <hr/>
+        <button @click="pa">pa</button>
+        <button @click="pb">pb</button>
+        <button @click="pc">pc</button>
+        <button @click="pd">pd</button>
+    </div>
+    <script>
+        pA = {
+            template:'<div>this is a pA {{a}}</div>',
+            data:function(){
+                return {
+                    a:1
+                }
+            }
+        };
+        pB = {
+            template:'<div>this is a pB</div>'
+        };
+        pC = {
+            template:'<div>this is a pC</div>'
+        };
+        pD = {
+            template:'<div>this is a pD</div>'
+        };
+        var vm =new Vue({
+            el:'#app',
+            data:{
+                who:'pB'
+            },
+            methods:{
+                pa:function(){
+                    this.who = 'pA';
+                },
+                pb:function(){
+                    this.who = 'pB';
+                },
+                pc:function(){
+                    this.who = 'pC';
+                },
+                pd:function(){
+                    this.who = 'pD';
+                }
+            },
+            components:{
+                'pA': pA,
+                'pB': pB,
+                'pC': pC,
+                'pD': pD,
+            }
+        })
+    </script>
+</body>
+</html>

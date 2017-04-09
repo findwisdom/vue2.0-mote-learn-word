@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component2</title>
+    <script src="../assets/js/vue.js"></script>
+    <link rel="stylesheet" href="../assets/css/index.css"/>
+</head>
+<body>
+<h1>component2</h1>
+<hr/>
+    <div id="app">
+        <world here="China" :location="message"></world>
+    </div>
+    <script>
+        worldword = {
+            template:'<div><div>my here is {{here}}</div><hr/><div>my here is {{location}}</div></div>',
+            props:{
+                here:{
+                    type:String
+                },
+                location:{
+                    type:String
+                }
+            }
+        };
+        var vm =new Vue({
+            el:'#app',
+            data:{
+                message:'USA'
+            },
+            components:{
+                'world': worldword
+            }
+        })
+    </script>
+</body>
+</html>

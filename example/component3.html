@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component3(父子孙组件)</title>
+    <script src="../assets/js/vue.js"></script>
+    <link rel="stylesheet" href="../assets/css/index.css"/>
+</head>
+<body>
+<h1>component3(父子孙组件)</h1>
+<hr/>
+    <div id="app">
+        <world>
+        </world>
+    </div>
+    <script>
+        city= {
+            template:'<div>我是孙组件</div>'
+        };
+        worldword = {
+            template:`<div><div>我是父组件</div><city></city></city>`,
+            components:{
+                "city": city
+            }
+        };
+        var vm =new Vue({
+            el:'#app',
+            data:{
+                message:'USA'
+            },
+            components:{
+                'world': worldword
+            }
+        })
+    </script>
+</body>
+</html>

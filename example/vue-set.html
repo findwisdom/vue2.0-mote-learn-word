@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.set</title>
+    <script src="../assets/js/vue.js"></script>
+    <link rel="stylesheet" href="../assets/css/index.css"/>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="a in goods">
+                {{a.name}}-{{a.num}}
+            </li>
+        </ul>
+        <p>总计{{count}}件产品</p>
+        <span v-if="set">{{set}}<hr/></span>
+        <button @click="qingkong">清空</button>
+    </div>
+    <button onclick="add()">+++++++</button>
+    <script>
+        function add(){
+            app.$set(asdf, 'set', '已被$set更改');
+            asdf.goods.push({name:'house',num:'1'})
+            app.count++;
+        }
+        var asdf = {
+            set:null,
+            count:3,
+            goods:[
+                {name:'car',num:'1'},
+                {name:'pen',num:'2'}
+            ]
+        };
+        var app = new Vue({
+            el:'#app',
+            data:asdf,
+            methods:{
+                qingkong:function(){
+                    this.count = 0;
+                    this.goods =[]
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

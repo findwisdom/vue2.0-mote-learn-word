@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>document</title>
+    <script src="../assets/js/vue.js"></script>
+    <link rel="stylesheet" href="../assets/css/index.css"/>
+</head>
+<body>
+    <h1>hello world 实例</h1>
+    <div id="app">
+        <div v-lxt.color.node="color" id="add">
+            {{num}}
+        </div>
+        <p><button @click="add">+</button></p>
+    </div>
+    <button onclick="jiebang()">解绑</button>
+    <script>
+        function jiebang(){
+            app.$destroy();
+        }
+        Vue.directive('lxt',{
+            bind:function(el,binding,vnode){//被绑定
+                console.log('1 - bind');
+                var s = JSON.stringify;
+                el.innerHTML=
+                'name:' + s(binding.name)+'<br>'+
+                'value:' + s(binding.value)+'<br>'+
+                'argument:' + s(binding.arg)+'<br>'+
+                'modifiers:' + s(binding.modifiers)+'<br>'+
+                'expression:' + s(binding.expression)+'<br>'+
+                'vnode key:' + Object.keys(vnode).join(',');
+                el.style='color'+ binding.value;
+            },
+            inserted:function(){//被绑定到节点
+                console.log('2 - inserted');
+            },
+            update:function(){//组件更新
+                console.log('3 - update');
+            },
+            componentUpdated:function(){//组件更新完成
+                console.log('4 - componentUpdated');
+            },
+            unbind:function(){//组件解绑
+                console.log('5 - unbind');
+            }
+        });
+        var app = new Vue({
+            el: '#app',
+            data: {
+               num:0,
+               color:'red'
+            },
+            methods:{
+                add:function(){
+                    this.num++;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

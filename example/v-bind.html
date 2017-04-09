@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind</title>
+    <script src="../assets/js/vue.js"></script>
+    <link rel="stylesheet" href="../assets/css/index.css"/>
+    <style>
+        .classA{
+            color:red;
+        }
+        .classB{
+            font-size: 200%;
+        }
+    </style>
+</head>
+<body>
+    <h1>v-bind</h1>
+    <hr>
+    <div id="app">
+        <img :src="imageSrc" :width="width" alt="">
+        <div :class="className">1.绑定class</div>
+        <div :class="{classA:colorOr}">2.绑定class中的判断</div>
+        <div :class="[classA,classB]">3.绑定class的数组</div>
+        <div :class="[colorOr?classA:classB]">4.绑定class中的三元表达式</div>
+        <div :class="[{classA:colorOr},classB]">5.绑定class中使用组合判断</div>
+        <hr>
+        <div :style="{color:color,fontSize:font}">6.style绑定</div>
+        <div :style="fontArray">7.绑定json数据</div>
+    </div>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                imageSrc:'https://vuejs.org.images/logo.png',
+                width:50,
+                className:'classA',
+                classA:'classA',
+                classB:'classB',
+                color:'blue',
+                font:30,
+                fontArray:{
+                    color:'green',
+                    fontSize:'20px'
+                }
+            }
+        });
+    </script>
+</body>
+</html>
